@@ -166,12 +166,12 @@ Este repositório deve concentrar:
 - laboratórios práticos;
 - referências cruzadas para o repositório principal do SentinelNode.
 
-Estrutura sugerida:
+Estrutura inicial do repositório:
 
 ```text
 SentinelNodeCourse/
 ├── README.md
-├── syllabus/
+├── modules/
 ├── labs/
 ├── diagrams/
 ├── slides/
@@ -214,7 +214,7 @@ Este repositório está em construção.
 
 O foco inicial é organizar:
 
-- o syllabus;
+- a estrutura programática;
 - a trilha didática;
 - os laboratórios;
 - os materiais visuais.
@@ -240,3 +240,32 @@ Se o curso vier a ser público, também vale incluir:
 - regras de reutilização;
 - créditos;
 - formato de contribuição.
+
+
+---
+
+# Estrutura programática e materiais
+
+Documentos iniciais já disponíveis neste repositório:
+
+- [Estrutura programática](docs/estrutura-programatica.md)
+- [Plano de curso](docs/course-plan.md)
+- [Roteiro de estudo do professor](docs/professor-study-guide.md)
+
+Módulos já estruturados:
+
+- [Módulo 0 — Introdução e visão sistêmica](modules/module-00-introducao.md)
+- [Módulo 1 — Hardware e ambiente de desenvolvimento](modules/module-01-hardware-ambiente.md)
+- [Módulo 2 — Arquitetura do repositório e fluxo do sistema](modules/module-02-arquitetura-repositorio.md)
+- [Módulo 3 — Componentes fundamentais do firmware](modules/module-03-componentes-firmware.md)
+- [Módulo 4 — Núcleo MQTT e contratos de comunicação](modules/module-04-mqtt-contratos.md)
+- [Módulo 5 — Robustez operacional](modules/module-05-robustez-operacional.md)
+- [Módulo 6 — Supervisor local](modules/module-06-supervisor-local.md)
+- [Módulo 7 — Persistência histórica e dashboards](modules/module-07-dashboards-analise.md)
+- [Módulo 8 — Evolução do projeto e produto](modules/module-08-evolucao-produto.md)
+
+Laboratórios iniciais:
+
+- [Laboratório 1 — Build, flash e monitor](labs/lab-01-build-flash-monitor.md)
+- [Laboratório 2 — Tópicos MQTT e configuração remota](labs/lab-02-topicos-mqtt-e-configuracao.md)
+- [Laboratório 3 — Robustez e falhas controladas](labs/lab-03-robustez-e-falhas-controladas.md)
