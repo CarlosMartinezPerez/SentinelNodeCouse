@@ -463,3 +463,12 @@ Depois deste planejamento, os próximos artefatos ideais são:
 3. sequência de laboratórios;
 4. lista de diagramas que precisam ser desenhados;
 5. roteiro específico para você estudar antes de gravar ou ministrar.
+
+
+## Nota metodológica
+
+Ao longo do curso, os componentes devem ser estudados sempre pela tríade:
+
+- arquitetura;
+- implementação em C;
+- comportamento operacional.

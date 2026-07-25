@@ -96,3 +96,12 @@ Ao final do curso, o estudante deverá ser capaz de:
 - interpretação de dashboards;
 - discussão crítica de tradeoffs;
 - projeto final curto de extensão ou adaptação.
+
+
+## Nota metodológica
+
+Ao longo do curso, os componentes devem ser estudados sempre pela tríade:
+
+- arquitetura;
+- implementação em C;
+- comportamento operacional.

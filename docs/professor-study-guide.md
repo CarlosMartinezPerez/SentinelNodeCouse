@@ -318,3 +318,12 @@ Depois deste roteiro, o mais útil é criar:
 2. laboratórios por módulo;
 3. diagramas de apoio;
 4. banco de perguntas frequentes para aula.
+
+
+## Nota metodológica
+
+Ao longo do curso, os componentes devem ser estudados sempre pela tríade:
+
+- arquitetura;
+- implementação em C;
+- comportamento operacional.
