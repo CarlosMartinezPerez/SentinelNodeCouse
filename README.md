@@ -30,7 +30,7 @@ Em outras palavras:
 
 ---
 
-# Para quem é este curso
+# Público-alvo
 
 Este curso é indicado para:
 
@@ -50,6 +50,112 @@ Pré-requisitos desejáveis:
 
 ---
 
+# Objetivos formativos
+
+Ao final do curso, o estudante deverá ser capaz de:
+
+- compreender a arquitetura geral do SentinelNode;
+- compilar, gravar e monitorar o firmware;
+- interpretar os contratos MQTT do sistema;
+- distinguir responsabilidades entre firmware, supervisor e dashboards;
+- analisar robustez operacional e comportamento em campo;
+- propor evoluções arquiteturais com critério técnico.
+
+---
+
+# Filosofia didática
+
+O curso foi concebido com progressão gradual, coerência conceitual e ênfase em
+arquitetura, programação em C e operação de um sistema embarcado realista.
+
+A regra pedagógica central é simples:
+
+primeiro compreender por que um componente existe; depois, como ele foi
+implementado; por fim, como ele se comporta em operação.
+
+Ao longo do curso, os componentes devem ser estudados sempre pela tríade:
+
+- arquitetura;
+- implementação em C;
+- comportamento operacional.
+
+---
+
+# Estrutura programática
+
+## Módulo 0 — Introdução e visão sistêmica
+
+- apresentação do curso;
+- problema industrial abordado;
+- visão geral do SentinelNode.
+
+## Módulo 1 — Hardware e ambiente de desenvolvimento
+
+- ESP32 e ESP-IDF;
+- sensores de referência;
+- build, flash e monitor.
+
+## Módulo 2 — Arquitetura do repositório e fluxo do sistema
+
+- organização do projeto;
+- fluxo de boot, coleta, publicação e supervisão.
+
+## Módulo 3 — Componentes fundamentais do firmware
+
+- configuração;
+- telemetria;
+- diagnósticos;
+- energia;
+- watchdog.
+
+## Módulo 4 — Núcleo MQTT e contratos de comunicação
+
+- tópicos;
+- payloads;
+- políticas de publicação;
+- QoS e confirmação.
+
+## Módulo 5 — Robustez operacional
+
+- store-and-forward;
+- reconexão;
+- recuperação de falhas;
+- comportamento degradado.
+
+## Módulo 6 — Supervisor local
+
+- broker;
+- backend;
+- frontend;
+- monitor MQTT.
+
+## Módulo 7 — Persistência histórica e dashboards
+
+- PostgreSQL;
+- Grafana;
+- leitura operacional e executiva.
+
+## Módulo 8 — Evolução do projeto e produto
+
+- variantes de firmware;
+- decisões de hardware;
+- linhas futuras de evolução.
+
+---
+
+# Sequência didática recomendada
+
+1. compreender o problema;
+2. observar o sistema funcionando;
+3. estudar a arquitetura;
+4. entender os componentes;
+5. dominar os contratos MQTT;
+6. estudar robustez;
+7. operar supervisor e dashboards;
+8. refletir sobre evolução de produto.
+
+---
+
 # O que o aluno vai aprender
 
 Ao longo do curso, o aluno vai entender:
@@ -65,105 +171,36 @@ Ao longo do curso, o aluno vai entender:
 
 ---
 
-# Estrutura do curso
+# Organização pedagógica por componente
 
-## Módulo 0 — Visão geral
+O núcleo do curso deve tratar cada componente em três planos simultâneos:
 
-- o problema
-- a solução
-- arquitetura geral
+1. sua responsabilidade arquitetural;
+2. sua implementação em C;
+3. seu efeito prático no sistema em execução.
 
-## Módulo 1 — Hardware e ambiente
+Exemplos centrais de estudo:
 
-- ESP32
-- ESP-IDF
-- build, flash e monitor
-
-## Módulo 2 — Arquitetura do firmware
-
-- organização do repositório
-- separação por componentes
-- fluxo do sistema
-
-## Módulo 3 — Estudo componente por componente
-
-- configuração
-- telemetria
-- diagnósticos
-- energia
-- watchdog
-- persistência
-- MQTT modular
-
-## Módulo 4 — Contrato MQTT
-
-- tópicos
-- payloads
-- comandos
-- configuração remota
-- QoS
-
-## Módulo 5 — Robustez operacional
-
-- reconnect
-- backoff
-- store-and-forward
-- recuperação de falhas
-- comportamento em `low_power`
-
-## Módulo 6 — Supervisor local
-
-- broker MQTT
-- backend
-- frontend
-- monitor MQTT
-- operação local
-
-## Módulo 7 — Dashboards e análise
-
-- PostgreSQL
-- Grafana
-- dashboards de overview, operations, inspection e executive
-
-## Módulo 8 — Evolução para produto
-
-- variantes de firmware
-- diferenças entre nós contínuos e de baixo consumo
-- decisões de hardware
-- expansão para cenários reais
-
----
-
-# Filosofia do curso
-
-Este curso segue uma ideia simples:
-
-primeiro entender o sistema, depois modificar o sistema.
-
-Ou seja, o foco não é decorar código. O foco é dominar:
-
-- responsabilidades;
-- fluxos;
-- contratos;
-- comportamento esperado;
-- limitações e tradeoffs.
-
-Isso torna o aluno capaz de:
-
-- manter o projeto;
-- estender o projeto;
-- adaptar a arquitetura para outros contextos.
+- `config_manager`;
+- `telemetry_manager`;
+- `diagnostics_manager`;
+- `power_manager`;
+- `watchdog_manager`;
+- `time_manager`;
+- `i2c_manager`;
+- drivers de sensores;
+- núcleo MQTT modular.
 
 ---
 
 # O que existe neste repositório
 
-Este repositório deve concentrar:
+Este repositório concentra:
 
-- planejamento das aulas;
-- material de apoio;
-- diagramas;
+- estrutura programática;
+- módulos do curso;
 - laboratórios práticos;
+- materiais de apoio;
 - referências cruzadas para o repositório principal do SentinelNode.
 
 Estrutura inicial do repositório:
@@ -177,6 +214,33 @@ SentinelNodeCourse/
 ├── slides/
 └── references/
 ```
+
+---
+
+# Materiais já disponíveis
+
+## Documentos centrais
+
+- [Estrutura programática](docs/estrutura-programatica.md)
+- [Roteiro de estudo do professor](docs/professor-study-guide.md)
+
+## Módulos já estruturados
+
+- [Módulo 0 — Introdução e visão sistêmica](modules/module-00-introducao.md)
+- [Módulo 1 — Hardware e ambiente de desenvolvimento](modules/module-01-hardware-ambiente.md)
+- [Módulo 2 — Arquitetura do repositório e fluxo do sistema](modules/module-02-arquitetura-repositorio.md)
+- [Módulo 3 — Componentes fundamentais do firmware](modules/module-03-componentes-firmware.md)
+- [Módulo 4 — Núcleo MQTT e contratos de comunicação](modules/module-04-mqtt-contratos.md)
+- [Módulo 5 — Robustez operacional](modules/module-05-robustez-operacional.md)
+- [Módulo 6 — Supervisor local](modules/module-06-supervisor-local.md)
+- [Módulo 7 — Persistência histórica e dashboards](modules/module-07-dashboards-analise.md)
+- [Módulo 8 — Evolução do projeto e produto](modules/module-08-evolucao-produto.md)
+
+## Laboratórios iniciais
+
+- [Laboratório 1 — Build, flash e monitor](labs/lab-01-build-flash-monitor.md)
+- [Laboratório 2 — Tópicos MQTT e configuração remota](labs/lab-02-topicos-mqtt-e-configuracao.md)
+- [Laboratório 3 — Robustez e falhas controladas](labs/lab-03-robustez-e-falhas-controladas.md)
 
 ---
 
@@ -201,6 +265,7 @@ Ao final do curso, a pessoa deve ser capaz de:
 
 - compilar, gravar e monitorar um nó;
 - entender a arquitetura do firmware;
+- ler e discutir a implementação em C dos componentes principais;
 - alterar parâmetros e comportamento com segurança;
 - operar a supervisão local;
 - interpretar dashboards e sinais de degradação;
@@ -215,19 +280,20 @@ Este repositório está em construção.
 O foco inicial é organizar:
 
 - a estrutura programática;
-- a trilha didática;
+- os módulos;
 - os laboratórios;
-- os materiais visuais.
+- o roteiro de estudo do professor;
+- os materiais visuais futuros.
 
 ---
 
 # Próximos passos
 
-- publicar o plano detalhado por módulo;
-- criar os primeiros laboratórios;
+- transformar módulos em aulas completas;
 - desenhar diagramas da arquitetura;
-- preparar roteiro de estudo do professor;
-- converter a documentação técnica em trilha pedagógica.
+- preparar slides e figuras de apoio;
+- expandir os laboratórios;
+- consolidar critérios de avaliação.
 
 ---
 
@@ -240,32 +306,3 @@ Se o curso vier a ser público, também vale incluir:
 - regras de reutilização;
 - créditos;
 - formato de contribuição.
-
-
----
-
-# Estrutura programática e materiais
-
-Documentos iniciais já disponíveis neste repositório:
-
-- [Estrutura programática](docs/estrutura-programatica.md)
-- [Plano de curso](docs/course-plan.md)
-- [Roteiro de estudo do professor](docs/professor-study-guide.md)
-
-Módulos já estruturados:
-
-- [Módulo 0 — Introdução e visão sistêmica](modules/module-00-introducao.md)
-- [Módulo 1 — Hardware e ambiente de desenvolvimento](modules/module-01-hardware-ambiente.md)
-- [Módulo 2 — Arquitetura do repositório e fluxo do sistema](modules/module-02-arquitetura-repositorio.md)
-- [Módulo 3 — Componentes fundamentais do firmware](modules/module-03-componentes-firmware.md)
-- [Módulo 4 — Núcleo MQTT e contratos de comunicação](modules/module-04-mqtt-contratos.md)
-- [Módulo 5 — Robustez operacional](modules/module-05-robustez-operacional.md)
-- [Módulo 6 — Supervisor local](modules/module-06-supervisor-local.md)
-- [Módulo 7 — Persistência histórica e dashboards](modules/module-07-dashboards-analise.md)
-- [Módulo 8 — Evolução do projeto e produto](modules/module-08-evolucao-produto.md)
-
-Laboratórios iniciais:
-
-- [Laboratório 1 — Build, flash e monitor](labs/lab-01-build-flash-monitor.md)
-- [Laboratório 2 — Tópicos MQTT e configuração remota](labs/lab-02-topicos-mqtt-e-configuracao.md)
-- [Laboratório 3 — Robustez e falhas controladas](labs/lab-03-robustez-e-falhas-controladas.md)
