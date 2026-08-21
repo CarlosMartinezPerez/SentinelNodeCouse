@@ -1,34 +1,53 @@
 # Módulo 5 — Robustez operacional
 
-## Objetivo
+## Natureza da aula
 
-Estudar os mecanismos que permitem ao SentinelNode operar de forma resiliente,
-relacionando arquitetura, implementação em C e comportamento em campo.
+Aula sobre falhas previsíveis em sistemas embarcados conectados e sobre as decisões que impedem que uma falha localizada interrompa a operação do nó.
 
-## Eixos do módulo
+## Objetivos de aprendizagem
 
-### 1. Arquitetura
+Ao final desta aula, o estudante deverá ser capaz de:
 
-- por que robustez não deve ficar concentrada em um único arquivo;
-- papel de watchdog, store-and-forward, backoff e recovery;
-- relação entre robustez local e observabilidade remota.
+- justificar watchdog, reconexão, persistência e recuperação de I²C;
+- distinguir falha funcional de perda de observabilidade;
+- interpretar backlog, reconexão e diagnóstico de sensores;
+- relacionar cada mecanismo de robustez a um componente do firmware.
 
-### 2. Implementação em C
+## Pré-requisitos
 
-- organização da persistência híbrida RAM + flash;
-- lógica de reconexão e retentativa;
-- supervisão por watchdog;
-- recuperação de I²C e tratamento de falha de sensor.
+- compreensão da arquitetura do firmware;
+- noções de MQTT e de leitura de telemetria.
 
-### 3. Operação do sistema
+## Tópicos de exposição
 
-- comportamento com broker indisponível;
-- comportamento com falha de sensor;
-- backlog, reconexão e recuperação;
-- interpretação de sinais de degradação no MQTT e nos dashboards.
+1. por que robustez não pode ficar concentrada em um único arquivo;
+2. watchdog e supervisão de execução;
+3. store-and-forward híbrido: RAM, flash e política de fila;
+4. reconexão Wi-Fi/MQTT, backoff e recuperação após broker indisponível;
+5. falhas de sensores, recuperação de I²C e estado degradado;
+6. o que o operador observa no MQTT, na página e no dashboard.
 
-## Resultados de aprendizagem
+## Demonstração prática sugerida
 
-- justificar a presença dos mecanismos de robustez;
-- analisar cenários degradados com base no código e nos sintomas observados;
-- relacionar implementação e recuperação operacional.
+- interromper o broker MQTT e observar a formação e a drenagem do backlog;
+- provocar uma falha temporária no barramento I²C, quando o hardware permitir;
+- observar a mudança de diagnósticos sem perda de controle do nó;
+- mostrar no código onde cada responsabilidade é implementada.
+
+## Exercício sugerido
+
+Apresentar três cenários: broker indisponível, sensor ausente e queda de Wi-Fi. Pedir que o estudante indique:
+
+1. quais componentes participam da recuperação;
+2. quais tópicos ou telas permitem observar o problema;
+3. qual dado pode ser perdido e qual deve ser preservado.
+
+## Perguntas para discussão
+
+- Por que é preferível descartar telemetria antiga a bloquear o firmware?
+- Em que situação a persistência em flash é essencial e quando ela pode ser excessiva?
+- Um nó online com sensor inválido está saudável? Como comunicar isso ao operador?
+
+## Resultado esperado
+
+O estudante deve entender robustez como propriedade arquitetural do conjunto, e não como uma coleção de tratamentos de erro isolados.
