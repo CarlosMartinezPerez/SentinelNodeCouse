@@ -36,6 +36,92 @@ idf.py -p /dev/ttyACM0 flash
 idf.py -p /dev/ttyACM0 monitor
 ```
 
+## Apoio de terminal Linux e ESP-IDF
+
+Os comandos abaixo são material de consulta para a bancada. Eles permitem localizar a placa, ativar o ambiente e inspecionar configurações sem alterar o firmware. Comandos que modificam a configuração do projeto estão identificados explicitamente.
+
+### Identificar a placa e a porta serial
+
+```bash
+lsusb
+ls /dev/ttyACM* /dev/ttyUSB* 2>/dev/null
+fuser -v /dev/ttyACM0
+```
+
+- `lsusb` confirma se o conversor USB da placa foi reconhecido pelo Linux;
+- `ls /dev/ttyACM* /dev/ttyUSB*` mostra as portas seriais candidatas;
+- `fuser` informa se outro processo está usando a porta. Ajuste `ttyACM0` quando a placa usar outra porta.
+
+Para acompanhar conexões e desconexões USB em tempo real:
+
+```bash
+journalctl -kf
+```
+
+### Ativar e conferir o ambiente ESP-IDF
+
+No ambiente de referência deste curso, o ESP-IDF 6.0.1 está instalado em `/home/carlos/.espressif/v6.0.1/esp-idf`.
+
+```bash
+export IDF_PATH=/home/carlos/.espressif/v6.0.1/esp-idf
+. "$IDF_PATH/export.sh"
+idf.py --version
+command -v idf.py
+```
+
+Caso o caminho não seja conhecido, procure o script de ativação:
+
+```bash
+find /home/carlos/.espressif -type f -name export.sh 2>/dev/null
+```
+
+O `export.sh` deve ser executado em cada novo terminal que for usado com o ESP-IDF, salvo se o usuário tiver configurado sua inicialização automática no shell.
+
+### Inspecionar e configurar o projeto
+
+Execute os comandos abaixo a partir da raiz do projeto:
+
+```bash
+cd /home/carlos/esp32_projects/SentinelNode
+idf.py --list-targets
+idf.py partition-table
+idf.py size
+idf.py size-components
+```
+
+- `partition-table` mostra como a flash está dividida entre NVS, aplicação e áreas de dados;
+- `size` e `size-components` ajudam a acompanhar o consumo de memória do firmware.
+
+O configurador interativo é aberto por:
+
+```bash
+idf.py menuconfig
+```
+
+Nele se definem, entre outros aspectos, tamanho da flash, tabela de partições, opções de bootloader, Wi-Fi e recursos de diagnóstico. Alterações no `menuconfig` modificam a configuração de build do projeto e devem ser feitas conscientemente, idealmente com revisão no Git.
+
+Para selecionar a família da placa, use apenas quando for realmente necessário mudar de alvo:
+
+```bash
+idf.py set-target esp32
+```
+
+Por exemplo, uma migração para ESP32-C3 usaria `idf.py set-target esp32c3`. Esse comando recria a configuração de build para o alvo selecionado; não deve ser usado como etapa rotineira de compilação do SentinelNode baseado em ESP32.
+
+### Compilar, gravar e observar
+
+```bash
+idf.py build
+idf.py -p /dev/ttyACM0 flash
+idf.py -p /dev/ttyACM0 monitor
+```
+
+Para gravar e abrir o monitor em sequência:
+
+```bash
+idf.py -p /dev/ttyACM0 flash monitor
+```
+
 ## Demonstração prática sugerida
 
 - compilar o projeto em sala;
