@@ -1,43 +1,63 @@
 # Módulo 4 — Núcleo MQTT e contratos de comunicação
 
-## Objetivo
+## Natureza da aula
 
-Compreender a comunicação do sistema por meio de sua arquitetura MQTT, de sua
-implementação em C e de seu comportamento operacional.
+Aula sobre a interface de comunicação do sistema e sobre a modularização da lógica MQTT.
 
-## Eixos do módulo
+## Objetivos de aprendizagem
 
-### 1. Arquitetura
+Ao final desta aula, o estudante deverá ser capaz de:
 
-- papel do núcleo MQTT no SentinelNode;
-- separação entre transporte, protocolo, política e entrega;
-- responsabilidades de `mqtt_manager`, `node_protocol`, `publish_policy`,
-  `telemetry_orchestrator`, `publish_tracker` e módulos correlatos.
+- identificar os tópicos MQTT do SentinelNode;
+- explicar o contrato de cada tópico principal;
+- compreender a diferença entre transporte, protocolo, política e confirmação;
+- reconfigurar o nó por MQTT com segurança conceitual.
 
-### 2. Implementação em C
+## Pré-requisitos
 
-- organização dos componentes MQTT no repositório;
-- callbacks, filas, políticas e controle de publicação;
-- tratamento de `config/set`, `config/pending`, `command` e respostas.
+- noções básicas de MQTT;
+- compreensão prévia da arquitetura do firmware.
 
-### 3. Operação do sistema
+## Tópicos de exposição
 
-- tópicos publicados e recebidos;
-- efeito prático de `essential` e `inspection`;
-- QoS 0 e QoS 1 em operação;
-- confirmação operacional, status efetivo e reconfiguração remota.
+1. prefixo `sentinelnode/<node>/`;
+2. tópicos publicados;
+3. tópicos recebidos;
+4. `essential` versus `inspection`;
+5. QoS 0 e QoS 1;
+6. `config/set` versus `config/pending`;
+7. confirmação operacional por `status` e por comportamento temporal de `telemetry`.
 
-## Conteúdo contratual
+## Demonstração prática sugerida
 
-- tópicos publicados;
-- tópicos recebidos;
-- `telemetry`, `status`, `health`, `inventory`, `event`;
-- `command` e `command/response`;
-- `config/set` e `config/pending`.
+- observar `telemetry`, `status`, `health`, `inventory` e `event` no monitor MQTT;
+- enviar `status` e `ping` por `command`;
+- alterar parâmetros via `config/set`;
+- observar a resposta do sistema.
 
-## Resultados de aprendizagem
+## Comandos úteis
 
-- ler e interpretar os payloads principais;
-- explicar a arquitetura modular da comunicação MQTT;
-- reconfigurar o nó remotamente;
-- distinguir contrato, implementação e efeito operacional.
+```bash
+mosquitto_sub -h 127.0.0.1 -v -t 'sentinelnode/#'
+mosquitto_pub -h 127.0.0.1 -t 'sentinelnode/node33/command' -m '{"cmd":"status"}'
+mosquitto_pub -h 127.0.0.1 -t 'sentinelnode/node33/config/set' -m '{"telemetry_interval_seconds":10}'
+mosquitto_pub -h 127.0.0.1 -t 'sentinelnode/node33/config/set' -m '{"publish_profile":"inspection"}'
+```
+
+## Exercício sugerido
+
+Pedir ao estudante que:
+
+1. liste os tópicos principais do sistema;
+2. identifique a finalidade operacional de cada um;
+3. explique por que `inspection` não deve ser o estado normal de toda a frota.
+
+## Perguntas para discussão
+
+- Por que o contrato MQTT precisa ser tratado como parte da arquitetura?
+- O que acontece quando `status` e `telemetry` confirmam aspectos diferentes da configuração?
+- Por que separar `config/pending` faz diferença em `low_power`?
+
+## Resultado esperado
+
+O estudante deve sair desta aula capaz de usar MQTT como lente arquitetural do SentinelNode, e não apenas como ferramenta de publish/subscribe.

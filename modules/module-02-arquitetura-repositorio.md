@@ -1,35 +1,53 @@
 # Módulo 2 — Arquitetura do repositório e fluxo do sistema
 
-## Objetivo
+## Natureza da aula
 
-Levar o estudante da leitura superficial de pastas para a compreensão do fluxo
-arquitetural do sistema e preparar o terreno para o estudo posterior dos
-componentes em código C e em operação.
+Aula de leitura arquitetural e organização sistêmica do projeto.
 
-## Eixos do módulo
+## Objetivos de aprendizagem
 
-### 1. Arquitetura
+Ao final desta aula, o estudante deverá ser capaz de:
 
-- organização em `components/`, `main/`, `docs/`, `supervisor/` e `tools/`;
-- fronteiras entre firmware, supervisor e dashboards;
-- fluxo de boot, coleta, publicação e supervisão.
+- navegar pelo repositório com critério;
+- distinguir responsabilidades entre diretórios e componentes;
+- explicar o fluxo de informações do sistema;
+- preparar-se para estudar o firmware por módulos.
 
-### 2. Implementação em C
+## Pré-requisitos
 
-- convenções de organização dos componentes;
-- headers, fontes e responsabilidades locais;
-- como localizar funções de inicialização, leitura, publicação e diagnóstico.
+- familiaridade básica com a estrutura de um projeto em C;
+- conclusão do módulo de ambiente e primeira execução.
 
-### 3. Operação do sistema
+## Tópicos de exposição
 
-- caminho da telemetria do sensor ao MQTT;
-- caminho do MQTT ao supervisor e ao Grafana;
-- pontos de observabilidade do sistema em execução.
+1. organização geral do repositório;
+2. função de `components/`, `main/`, `docs/`, `supervisor/` e `tools/`;
+3. boot e inicialização;
+4. coleta de sensores;
+5. publicação MQTT;
+6. persistência, supervisão e dashboards.
 
-## Resultados de aprendizagem
+## Demonstração prática sugerida
 
-- localizar responsabilidades no repositório;
-- explicar o caminho da telemetria do sensor ao dashboard;
-- distinguir módulos centrais e módulos auxiliares;
-- preparar-se para estudar cada componente em três planos: arquitetura, código
-  e operação.
+- abrir o repositório e percorrer as pastas principais;
+- mostrar como uma informação sai do sensor e chega ao dashboard;
+- usar um quadro ou terminal para mapear dependências.
+
+## Exercício sugerido
+
+Pedir ao estudante que monte um pequeno mapa textual com:
+
+- onde nasce a telemetria;
+- onde ela é publicada;
+- onde ela é persistida;
+- onde ela é visualizada.
+
+## Perguntas para discussão
+
+- Por que a arquitetura do repositório importa para manutenção?
+- O que se perde quando tudo fica concentrado em poucos arquivos?
+- Em que medida a estrutura de pastas já antecipa a arquitetura do sistema?
+
+## Resultado esperado
+
+O estudante deve sair desta aula sabendo localizar responsabilidades no projeto e enxergar o SentinelNode como um sistema articulado, não como um conjunto solto de arquivos.

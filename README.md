@@ -222,7 +222,7 @@ SentinelNodeCourse/
 ## Documentos centrais
 
 - [Estrutura programática](docs/estrutura-programatica.md)
-- [Roteiro de estudo do professor](docs/professor-study-guide.md)
+
 
 ## Módulos já estruturados
 
@@ -282,7 +282,6 @@ O foco inicial é organizar:
 - a estrutura programática;
 - os módulos;
 - os laboratórios;
-- o roteiro de estudo do professor;
 - os materiais visuais futuros.
 
 ---

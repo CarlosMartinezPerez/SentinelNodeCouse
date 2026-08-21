@@ -1,22 +1,57 @@
 # Módulo 0 — Introdução e visão sistêmica
 
-## Objetivo
+## Natureza da aula
 
-Apresentar o SentinelNode como sistema embarcado completo e contextualizar o
-problema que o curso pretende estudar.
+Aula de abertura e contextualização do curso.
 
-## Conteúdo
+## Objetivos de aprendizagem
 
-- apresentação do curso;
-- visão geral do SentinelNode;
-- problema industrial de telemetria e supervisão;
-- diferenças entre protótipo simples e sistema robusto;
-- camadas do projeto: nó, supervisor e dashboards.
+Ao final desta aula, o estudante deverá ser capaz de:
 
-## Resultados de aprendizagem
+- definir o que é o SentinelNode;
+- explicar qual problema industrial o projeto procura resolver;
+- distinguir as camadas nó, supervisor e dashboard;
+- situar o curso dentro de uma perspectiva de sistemas embarcados completos.
 
-Ao final deste módulo, o estudante deverá ser capaz de:
+## Pré-requisitos
 
-- descrever o propósito do SentinelNode;
-- identificar as camadas da solução;
-- situar o curso dentro de um contexto de IoT industrial.
+- noções gerais de microcontroladores;
+- curiosidade sobre sistemas IoT e telemetria;
+- nenhuma familiaridade prévia com o SentinelNode é exigida.
+
+## Ideias centrais da aula
+
+- o SentinelNode não é apenas firmware de sensor;
+- o projeto combina medição, comunicação, diagnóstico, persistência e análise;
+- o curso deve ser compreendido como estudo de arquitetura, código C e operação.
+
+## Tópicos de exposição
+
+1. o problema de monitorar ativos e processos remotamente;
+2. limites de protótipos simples em comparação com soluções mais robustas;
+3. visão geral do SentinelNode;
+4. noção de telemetria, diagnóstico, supervisão e análise histórica;
+5. apresentação da trilha do curso.
+
+## Demonstração prática sugerida
+
+- mostrar uma captura de telemetria do nó;
+- mostrar a página de supervisão em funcionamento;
+- mostrar um dashboard Grafana com histórico já persistido.
+
+## Exercício sugerido
+
+Pedir ao estudante que escreva, em poucas linhas, a diferença entre:
+
+- um nó sensor simples;
+- um nó sensor com arquitetura operacional completa.
+
+## Perguntas para discussão
+
+- Em que momento um projeto embarcado deixa de ser só um protótipo e passa a ser um sistema?
+- Quais riscos aparecem quando comunicação, diagnóstico e persistência são ignorados?
+- Por que pensar em operação desde o início muda a arquitetura do firmware?
+
+## Resultado esperado
+
+O estudante deve terminar a aula com uma imagem mental do sistema como um todo, sem ainda entrar nos detalhes internos do código.

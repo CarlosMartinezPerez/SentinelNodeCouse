@@ -1,21 +1,63 @@
 # Módulo 1 — Hardware e ambiente de desenvolvimento
 
-## Objetivo
+## Natureza da aula
 
-Estabelecer a base experimental do curso, permitindo build, flash e monitor do
-firmware.
+Aula de preparação experimental e contato inicial com a ferramenta de desenvolvimento.
 
-## Conteúdo
+## Objetivos de aprendizagem
 
-- ESP32 como plataforma de referência;
-- ESP-IDF 6.0.1;
-- sensores de referência do projeto;
-- organização do ambiente Linux;
-- uso de `idf.py build`, `flash` e `monitor`.
+Ao final desta aula, o estudante deverá ser capaz de:
 
-## Resultados de aprendizagem
+- identificar o hardware de referência do projeto;
+- preparar o ambiente ESP-IDF;
+- compilar o firmware;
+- gravar o firmware na placa;
+- abrir o monitor serial e observar o sistema em execução.
 
-- preparar o ambiente de desenvolvimento;
-- compilar o projeto;
-- gravar o firmware em uma placa de referência;
-- observar saídas no monitor serial e no MQTT.
+## Pré-requisitos
+
+- noções básicas de terminal Linux;
+- noções elementares de compilação e gravação em microcontroladores.
+
+## Tópicos de exposição
+
+1. ESP32 como plataforma de referência;
+2. papel do BMP280, MPU6500 e medição de bateria na bancada de referência;
+3. organização do ambiente com ESP-IDF 6.0.1;
+4. build, flash e monitor;
+5. diferença entre monitor serial e monitor MQTT.
+
+## Comandos-base
+
+```bash
+cd /home/carlos/esp32_projects/SentinelNode
+idf.py build
+idf.py -p /dev/ttyACM0 flash
+idf.py -p /dev/ttyACM0 monitor
+```
+
+## Demonstração prática sugerida
+
+- compilar o projeto em sala;
+- gravar a placa;
+- abrir o monitor serial;
+- ligar o monitor MQTT em paralelo.
+
+## Exercício sugerido
+
+Solicitar ao estudante que:
+
+1. faça o build do projeto;
+2. identifique a porta serial da placa;
+3. grave e abra o monitor;
+4. registre os primeiros sinais observados no boot.
+
+## Perguntas para discussão
+
+- Quais informações aparecem primeiro no boot?
+- O que o monitor serial mostra que o MQTT não mostra?
+- O que o MQTT mostra que o serial não organiza tão bem para operação remota?
+
+## Resultado esperado
+
+O estudante deve sair da aula apto a reproduzir o ciclo mínimo de desenvolvimento e observação do firmware.
