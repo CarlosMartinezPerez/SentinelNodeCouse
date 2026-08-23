@@ -77,6 +77,43 @@ find /home/carlos/.espressif -type f -name export.sh 2>/dev/null
 
 O `export.sh` deve ser executado em cada novo terminal que for usado com o ESP-IDF, salvo se o usuário tiver configurado sua inicialização automática no shell.
 
+### Configurar o nó antes do primeiro flash
+
+No SentinelNode, o aluno não deve procurar pinos, broker e defaults em vários drivers. A configuração pré-flash não secreta fica reunida em:
+
+```text
+components/config_manager/node_config.h
+```
+
+Esse arquivo contém, em seções separadas:
+
+- identidade do nó e URI do broker MQTT;
+- pinos e frequência do I²C;
+- endereços de BMP280 e MPU6500;
+- medição de bateria, divisor de tensão e LED de Wi-Fi;
+- valores usados no primeiro boot e após `factory_reset`.
+
+Credenciais não ficam nesse arquivo. O aluno deve criar localmente o arquivo ignorado pelo Git:
+
+```bash
+cp components/config_manager/wifi_credentials_example.h \
+   components/config_manager/wifi_credentials.h
+```
+
+Depois, preenche SSID e senha em `wifi_credentials.h`. Esse arquivo não deve ser enviado ao GitHub, exibido em aula ou incluído em documentação.
+
+### Perfil protegido da placa de referência
+
+O perfil suportado pelo curso é ESP32 com 4 MB de flash. `sdkconfig.defaults` e `partitions.csv` fixam a arquitetura de build e a área persistente da telemetria; não são arquivos de configuração rotineira do aluno.
+
+Após compilar, confirme o perfil com:
+
+```bash
+bash tools/verify_board_profile.sh
+```
+
+O comando verifica target `esp32`, flash de 4 MB e o layout de partições esperado. Ele não modifica arquivos. Uma troca para ESP32-C3, S3 ou outra capacidade de flash exige estudo próprio de target, GPIO, ADC, partições e testes; não é uma alteração de instalação comum.
+
 ### Inspecionar e configurar o projeto
 
 Execute os comandos abaixo a partir da raiz do projeto:
@@ -89,7 +126,7 @@ idf.py size
 idf.py size-components
 ```
 
-- `partition-table` mostra como a flash está dividida entre NVS, aplicação e áreas de dados;
+- `partition-table` mostra como a flash está dividida entre NVS (Non-Volatile Storage — armazenamento não volátil), aplicação e áreas de dados;
 - `size` e `size-components` ajudam a acompanhar o consumo de memória do firmware.
 
 O configurador interativo é aberto por:
@@ -98,7 +135,7 @@ O configurador interativo é aberto por:
 idf.py menuconfig
 ```
 
-Nele se definem, entre outros aspectos, tamanho da flash, tabela de partições, opções de bootloader, Wi-Fi e recursos de diagnóstico. Alterações no `menuconfig` modificam a configuração de build do projeto e devem ser feitas conscientemente, idealmente com revisão no Git.
+Nele se definem opções avançadas de build, bootloader e recursos do ESP-IDF. No perfil de referência, o aluno não deve alterar tamanho da flash ou tabela de partições por `menuconfig`: essas decisões já estão protegidas no repositório. Alterações avançadas devem ser feitas conscientemente, com revisão no Git e validação de build.
 
 Para selecionar a família da placa, use apenas quando for realmente necessário mudar de alvo:
 
@@ -112,6 +149,7 @@ Por exemplo, uma migração para ESP32-C3 usaria `idf.py set-target esp32c3`. Es
 
 ```bash
 idf.py build
+bash tools/verify_board_profile.sh
 idf.py -p /dev/ttyACM0 flash
 idf.py -p /dev/ttyACM0 monitor
 ```

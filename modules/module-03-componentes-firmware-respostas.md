@@ -6,7 +6,7 @@ Este gabarito descreve os componentes a partir da implementação atual do Senti
 
 **Responsabilidade.** Manter a configuração operacional do nó em memória e persistir os valores em NVS. Centraliza intervalo de telemetria, habilitação de sensores, RSSI, modo `continuous` ou `low_power`, perfil de publicação, QoS e intervalo de sono.
 
-**Dados de entrada.** Valores padrão do firmware; configuração carregada da NVS; alterações recebidas pelo caminho de configuração MQTT e validadas pelo protocolo.
+**Dados de entrada.** Valores de primeiro boot definidos em `node_config.h`; configuração carregada da NVS; alterações recebidas pelo caminho de configuração MQTT e validadas pelo protocolo.
 
 **Dados de saída.** A estrutura `node_runtime_config_t`, consultada pelos demais componentes; resultado de validação/persistência; contagem de gravações em flash; valores de configuração apresentados em `status`, `inventory` e respostas a comando.
 
